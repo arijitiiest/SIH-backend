@@ -3,6 +3,14 @@ from django.contrib.auth.models import User
 
 
 class Road(models.Model):
+    class Status(models.TextChoices):
+        SUB = '1', "submitted"
+        APP = '2', "approved"
+        REJ = '3', "rejected"
+        WIP = '4', "workinprogress"
+        COM = '5', "completed"
+
+
     road_name = models.CharField(max_length=100)
 
     road_condition = models.CharField(max_length=600, blank=True)
@@ -19,6 +27,12 @@ class Road(models.Model):
 
     owner = models.ForeignKey(
         User, related_name='roads', on_delete=models.CASCADE, null=True)
+
+    status = models.CharField(max_length=2, choices=Status.choices, default=Status.SUB)
+
+    isRealTime = models.BooleanField(blank=True, default=False)
+
+
 
     created_at = models.DateTimeField(auto_now_add=True)
 

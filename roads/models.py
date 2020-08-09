@@ -32,6 +32,9 @@ class Road(models.Model):
 
     isRealTime = models.BooleanField(blank=True, default=False)
 
+    PCI = models.DecimalField(
+        max_digits=22, decimal_places=16, blank=True, null=True)
+
 
 
     created_at = models.DateTimeField(auto_now_add=True)
